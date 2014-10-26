@@ -31,17 +31,19 @@ RUN	rm -rf /tmp/* /var/tmp/* && rm -rf /var/lib/apt/lists/* && rm -f /etc/dpkg/d
 # If you mount a volume over /var/subsonic, create symlinks
 # <host-dir>/var/subsonic/transcode/ffmpeg -> /usr/local/bin/ffmpeg
 # <host-dir>/var/subsonic/transcode/lame -> /usr/local/bin/lame
-RUN	ln /var/subsonic/transcode/ffmpeg /var/subsonic/transcode/lame /usr/local/bin
+#RUN	ln /var/subsonic/transcode/ffmpeg /var/subsonic/transcode/lame /usr/local/bin
+RUN	ln /var/subsonic/transcode/ffmpeg /usr/local/bin
+RUN	cd /var/subsonic/transcode && ln -s "$(which flac)"
 RUN	chown -R downloads:downloads /var/subsonic
 
 ADD	startup.sh /startup.sh
 
-RUN	mkdir /subsonic
+RUN	mkdir -p /data && chown downloads:downloads /data
+VOLUME	[/data]
 VOLUME	[/music]
 VOLUME	[/podcasts]
 
 EXPOSE	4040
 
-RUN	chown downloads:downloads /subsonic
 USER	downloads
 ENTRYPOINT	["/startup.sh"]

@@ -1,5 +1,5 @@
 #!/bin/sh
-HOME=/subsonic
+HOME=/data
 HOST=0.0.0.0
 PORT=4040
 CONTEXT_PATH=/
@@ -22,4 +22,4 @@ export LC_ALL=en_US.UTF-8
 		  --default-podcast-folder=$PODCAST_FOLDER \
                   --default-playlist-folder=$PLAYLIST_FOLDER
 sleep 5
-tail -f /subsonic/subsonic_sh.log
+tail -f /data/subsonic_sh.log
