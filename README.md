@@ -18,7 +18,7 @@ docker-subsonic and Subsonic itself.
 
 You can run this container with:
 
-    sudo docker run -p 4040:4040 -v /mymusicfolder:/music -v /mypodcastfolder:/podcasts captnbp/docker-subsonic
+    sudo docker run -p 4040:4040 -v /mymusicfolder:/music -v /mypodcastfolder:/podcasts -v /mysubsonicfolder:/data captnbp/docker-subsonic
 
 From now on when you start/stop docker-subsonic you should use the container id
 with the following commands. To get your container id, after you initial run
@@ -39,6 +39,10 @@ name which is `captnbp/docker-subsonic:latest`.
 [1]: http://www.subsonic.org
 
 ## Volumes:
+#### `/data`
+
+Home directory for subsonic, subsonic stores it's log, database properties in this folder. (i.e. /opt/appdata/subsonic)
+
 #### `/music`
 
 Defualt music folder. If remote share ensure it's mounted before run command is issued. 
