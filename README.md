@@ -48,3 +48,13 @@ Defualt music folder. If remote share ensure it's mounted before run command is 
 
 Defualt podcasts folder. If remote share ensure it's mounted before run command is issued.
 (i.e. /opt/downloads/podcasts or /media/Tower/podcasts)
+
+## Troubleshooting
+### FLAC playback
+The FFmpeg transcoder doesn't handle FLAC files well, and clients will often fail to play the resultant streams. (at least, on my machine) Using FLAC and LAME instead of FFmpeg solves this issue. This workaround requires that the FLAC and LAME transcoders have been installed, as explained in #Install transcoders.
+
+Start Subsonic and go to settings > transcoding. Ensure that the default FFmpeg transcoder does not get used on files with a "flac" extension, then add a new entry. You'll end up with something like this: 
+Name|Convert from|Convert to|Step 1|Step 2|
+----|------------|----------|------|------|
+mp3|default|... NOT flac ...|mp3|ffmpeg ...| 	 
+mp3|flac|flac|mp3|flac --silent --decode --stdout %s|lame --silent -h -b %b -|

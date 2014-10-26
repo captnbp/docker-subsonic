@@ -11,8 +11,8 @@ RUN	apt-get -q update
 RUN	apt-mark hold initscripts udev plymouth mountall
 RUN	apt-get -qy --force-yes dist-upgrade
 
-# install dependencies for subsonic
-RUN	apt-get install -qy openjdk-6-jre && apt-get clean
+# install dependencies for subsonic and clean
+RUN	apt-get install -qy openjdk-6-jre flac lame && apt-get clean && rm -rf /tmp/* /var/tmp/* && rm -rf /var/lib/apt/lists/* && rm -f /etc/dpkg/dpkg.cfg.d/02apt-speedup
 
 # install subsonic
 ADD	http://downloads.sourceforge.net/project/subsonic/subsonic/5.0/subsonic-5.0.deb /tmp/subsonic.deb
@@ -23,7 +23,7 @@ RUN	addgroup --system downloads -gid 1001
 RUN	adduser --system --gecos downloads --shell /usr/sbin/nologin --uid 1001 --gid 1001 --disabled-password  downloads
 
 # Clean up
-RUN	apt-get clean && rm -rf /tmp/* /var/tmp/* && rm -rf /var/lib/apt/lists/* && rm -f /etc/dpkg/dpkg.cfg.d/02apt-speedup
+RUN	rm -rf /tmp/* /var/tmp/* && rm -rf /var/lib/apt/lists/* && rm -f /etc/dpkg/dpkg.cfg.d/02apt-speedup
 
 # Create hardlinks to the transcoding binaries.
 # This way we can mount a volume over /var/subsonic.
