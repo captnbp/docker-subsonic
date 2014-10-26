@@ -51,7 +51,7 @@ Defualt podcasts folder. If remote share ensure it's mounted before run command 
 
 ## Troubleshooting
 ### FLAC playback
-The FFmpeg transcoder doesn't handle FLAC files well, and clients will often fail to play the resultant streams. (at least, on my machine) Using FLAC and LAME instead of FFmpeg solves this issue. This workaround requires that the FLAC and LAME transcoders have been installed, as explained in #Install transcoders.
+The FFmpeg transcoder doesn't handle FLAC files well, and clients will often fail to play the resultant streams. (at least, on my machine) Using FLAC and LAME instead of FFmpeg solves this issue.
 
 Start Subsonic and go to settings > transcoding. Ensure that the default FFmpeg transcoder does not get used on files with a "flac" extension, then add a new entry. You'll end up with something like this: 
 
